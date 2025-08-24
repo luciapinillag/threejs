@@ -1,0 +1,16 @@
+#info {
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  z-index: 100;
+  display:block;
+  height: 500px;
+  background-color: aqua;
+}
+h1 {
+  color: black;
+  font-family: sans-serif;
+  font-size: 24px;
+  font-weight: normal;
+}

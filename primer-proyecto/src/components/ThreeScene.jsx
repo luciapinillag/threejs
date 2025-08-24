@@ -2,6 +2,11 @@ import { useEffect, useRef } from "react";
 //importar three.js al componente 
 import * as THREE from "three";
 
+// importar las dependencias 
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
+
+
 export default function ThreeScene() {
   const mountRef = useRef(null);
 
@@ -28,6 +33,27 @@ export default function ThreeScene() {
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
+
+    //loader para las fuentes 
+    const loader = new FontLoader();
+    loader.load("/fonts/helvetiker_regular.typeface.json",(font)=>{
+        const textGeometry = new TextGeometry("Hola Lucy!!",{
+            font: font,
+            size:0.8, // tamaño dl texto
+            heiht:0.2, // profundidad del texto
+            curveSegments:12, // suavizado de las curvas
+            bevelEnabled:true, // habilitar bisel
+            bevelThickness:0.02, // grosor del bisel
+            bevelSize:0.02, // tamaño del bisel
+            bevelSegments:5, // segmentos del bisel
+        });
+
+        const textMaterial = new THREE.MeshStandardMaterial({color:0xff0055});
+        const textMesh = new THREE.Mesh(textGeometry,textMaterial);
+        textMesh.position.set (-2, 0, 0);
+        textMesh.castShadow = true;
+        scene.add(textMesh);
+    });
 
     // 5. Animación
     const animate = () => {
